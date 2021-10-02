@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2f972935-70d7-4ae8-b156-7b3a89fcaba6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/templates/311_v2.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app6.py" beforeDir="false" afterPath="$PROJECT_DIR$/app6.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/311.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/311.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/foliummap.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/foliummap.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -126,7 +128,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/app6.py</url>
-          <line>246</line>
+          <line>228</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

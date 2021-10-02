@@ -410,6 +410,47 @@ def render_311():
             return render_template("311.html", community_board = community_board)
     return render_template('311.html')
 
+@server.route('/311_v2', methods=['GET', 'POST'])
+def render_311_v2():
+    """311_v2.html"""
+    if request.method == "POST":
+        community_board = request.form.get("cbs", None)
+
+        ##=== EVERYTHING BETWEEN HERE IS FROM TEST SANDBOX 311 API
+        ENDPOINT = "https://data.cityofnewyork.us/resource/erm2-nwe9.geojson"
+        QUERY_SYMBOL = '?'
+        CB = 'community_board'
+        cboard = community_board
+        base_url = ENDPOINT + QUERY_SYMBOL + CB + '=' + cboard
+        # Blank Space in url works with Socrata, but not geopandas, so replacing space with html hexadecimal space.
+        base_url = base_url.replace(' ', '%20')
+        cb3_complaints = requests.get(base_url)
+
+        cb3_complaints_geo = gpd.read_file(base_url)
+
+        # 1 Create new geodataframe of rows with null geometry so that data is not lost
+        complaints_null_geo = cb3_complaints_geo[cb3_complaints_geo['geometry'].isna()]
+
+        # 2 Remove all rows with null geometry from original geodataframe
+        cb3_complaints_geo = cb3_complaints_geo[cb3_complaints_geo['geometry'].notna()]
+
+        bounds = cb3_complaints_geo.total_bounds
+        a = np.mean(bounds[0:3:2]).round(3)
+        b = np.mean(bounds[1:4:2]).round(3)
+        data_centroid = [b, a]
+
+        mapcomplaints = folium.Map(location=data_centroid, tiles='cartodbpositron', zoom_start=10, width='30%', height='30%', control_scale=True)
+        folium.features.GeoJson(cb3_complaints_geo,
+                                ).add_to(mapcomplaints)
+
+        mapcomplaints.save('templates/foliummap.html')
+
+        ##=== EVERYTHING BETWEEN HERE IS FROM TEST SANDBOX 311 API
+
+        if community_board != None:
+            return render_template("311.html", community_board = community_board)
+    return render_template('311_v2.html')
+
 
 
 if __name__ == '__main__':
