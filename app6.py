@@ -140,6 +140,13 @@ app.layout = html.Div(children=[
 
 # ============================================
 
+"""This flask route  demonstrates variable rules """
+
+
+@server.route('/leaflet_test')
+def leaflet_test():
+    """leaflet_test.html"""
+    return render_template('leaflet_test.html', author= 'Calvin')
 
 @server.route('/test_page/<test_pg_num>')
 def test_page(test_pg_num):
@@ -450,7 +457,6 @@ def render_311_v2():
         if community_board != None:
             return render_template("311.html", community_board = community_board)
     return render_template('311_v2.html')
-
 
 
 if __name__ == '__main__':

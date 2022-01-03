@@ -1,0 +1,227 @@
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+
+  <title>Calvin Brown</title>
+
+  <meta name="author" content="" />
+  <meta name="description" content="Urban Planner, Data Analyst, Cartographer, Transit and Safe Streets Advocate">
+
+
+<link rel="stylesheet" href="https://calvinbrown32.github.io//css/bootstrap4.min.css" />
+<link rel="stylesheet" href="https://calvinbrown32.github.io//css/bootstrap-social.css" />
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css" />
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<link rel="stylesheet" href="https://calvinbrown32.github.io/css/pygment_highlights.css" />
+
+<link rel="stylesheet" href="https://calvinbrown32.github.io/css/main.css" />
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+
+
+    <!-- START OF LEAFLET FILES / DATA -->
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
+    <!-- D3 -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.min.js"></script>
+
+   <!-- LEAFLET AJAX
+   <script src="http://calvinbrown32.github.io/js/leaflet.ajax.min.js"></script> -->
+
+    <!--  TRIMET DATA: THESE ARE GEOJSON DATA. THEY ARE ADDED AS JS because they are assigned to variables within the file-->
+
+    <script type="text/javascript" src='https://calvinbrown32.github.io/JWAFiles/maxline.js'></script>
+    <script type="text/javascript" src='https://calvinbrown32.github.io/JWAFiles/route2inboundline.js'></script>
+    <script type="text/javascript" src='https://calvinbrown32.github.io/JWAFiles/route2outboundline.js'></script>
+    <script type="text/javascript" src='https://calvinbrown32.github.io/JWAFiles/2021/isos_w_pop_max_yellow_stops.js'></script>
+    <script type="text/javascript" src='https://calvinbrown32.github.io/JWAFiles/2021/isos_w_pop_route_2_inbound_and_io.js'></script>
+    <script type="text/javascript" src='https://calvinbrown32.github.io/JWAFiles/2021/isos_w_pop_route_2_outbound.js'></script>
+    <script type="text/javascript" src='https://calvinbrown32.github.io/JWAFiles/2021/transit_stops_w_pop_max_yellow_stops.js'></script>
+    <script type="text/javascript" src='https://calvinbrown32.github.io/JWAFiles/2021/transit_stops_w_pop_route_2_inbound_and_io.js'></script>
+    <script type="text/javascript" src='https://calvinbrown32.github.io/JWAFiles/2021/transit_stops_w_pop_route_2_outbound.js'></script>
+
+      <style>
+        .bar {
+            fill: steelblue;
+        }
+        </style>
+
+<style>#map { width: 99%; height: 500px; }
+.info { padding: 6px 8px; font: 14px/16px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 5px; color: #777; }
+.legend { text-align: left; line-height: 18px; color: #555; } .legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7; }</style>
+      <!-- END OF LEAFLET FILES / DATA -->
+
+  </head>
+
+
+  <body>
+
+<!-- <nav class="navbar navbar-expand-md navbar-custom"> -->
+<nav class="navbar navbar-expand-md fixed-top navbar-light bg-light">
+    <a class="navbar-brand-custom" href="http://calvinbrown32.github.io">Calvin Brown</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav ml-auto">
+
+    <!-- ** FUTURE ABOUT PAGE HERE:
+        <li class="nav-item-custom">
+          <a class="nav-link" href="https://calvinbrown32.github.io/resume">About</a> </li>
+    ** -->
+
+   <!-- ** FUTURE ABOUT PAGE HERE:
+        <li class="nav-item-custom">
+        <a class="nav-link" href="http://127.0.0.1:5000/portfolio2">Portfolio</a> </li>
+   ** -->
+       <li class="nav-item-custom">
+       <a class="nav-link" href="https://calvinbrown32.github.io/essays">Essays</a> </li>
+
+       <li class="nav-item-custom">
+       <a class="nav-link" href="https://calvinbrown32.github.io/resume">Resume</a> </li>
+
+       <li class="nav-item-custom">
+       <a class="nav-link" href="https://calvinbrown32.github.io/contact">Contact</a> </li>
+
+    </ul>
+  </div>
+</nav>
+
+
+<header class="header-section ">
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="page-heading">
+          <h1>Calvin Brown</h1>
+
+            <hr class="small">
+            <span class="page-subheading">Urban Planner, Data Analyst, Cartographer, Transit and Safe Streets Advocate</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+
+<div class="container">
+<div class="row align-items-center">
+
+<div class="col-sm-12  py-4">
+
+    <div id='map'class="mx-auto"></div>
+<script src="static/leaflet_map.js"></script>
+
+
+    <div class="container">
+<div class="row">
+    <div id="bar_graph" class="col"></div>
+
+<script src="static/max_bar_chart.js"></script>
+<!--
+    <div id="bar_graph_max_line" class="col">
+    <p> Max Yellow Line Residential Coverage by Stop:
+    </p>
+        </div>
+
+<div id="bar_graph_route_2_ib" class="col">
+    <p>Route 2 Inbound Line Residential Coverage by Stop: </p>
+    </div>
+<div id="bar_graph_route_2_ob" class="col">
+    <p>Route 2 Outbound Line Residential Coverage by Stop: </p>
+    </div>
+
+
+<script src="static/route_2_ib_bar_chart.js"></script>
+<script src="static/route_2_ob_bar_chart.js"></script>
+<script src="static/max_bar_chart.js"></script>
+-->
+	<!--
+-->
+    </div>
+  </div>
+</div>
+        </div>
+  </div>
+</div>
+</body>
+
+  <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+
+        <ul class="list-inline text-center footer-links">
+
+            <li class="list-inline-item">
+                <a href="mailto:calvinbrown32@gmail.com" title="Email me"><span class="fa-stack                 fa-lg" aria-hidden="true">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                </span>
+                <span class="sr-only">Email me</span>
+              </a>
+            </li>
+
+            <li class="list-inline-item">
+            <a href="https://twitter.com/calvinbrown32" title="Twitter"><span class="fa-stack               fa-lg" aria-hidden="true">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                </span>
+                <span class="sr-only">Twitter</span>
+              </a>
+            </li>
+
+            <li class="list-inline-item">
+                <a href="https://www.instagram.com/calvindechicago" title="Instagram"><span                     class="fa-stack fa-lg" aria-hidden="true">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                </span>
+                <span class="sr-only">Instagram</span>
+              </a>
+            </li>
+
+            <li class="list-inline-item">
+                <a href="https://linkedin.com/in/calvin-brown-467b4b33" title="LinkedIn"><span                  class="fa-stack fa-lg" aria-hidden="true">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                </span>
+                <span class="sr-only">LinkedIn</span>
+              </a>
+            </li>
+        </ul>
+
+      <p class="copyright text-muted">
+
+      &nbsp;&bull;&nbsp;
+      2021
+
+      &nbsp;&bull;&nbsp;
+      <a href="https://calvinbrown32.github.io">Calvin Brown</a>
+
+
+      </p>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+
+  </body>
+</html>
