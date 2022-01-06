@@ -13,7 +13,7 @@
     console.log(data);
 
     // set the dimensions and margins of the graph
-    var margin = {top: 20, right: 20, bottom: 200, left: 40},
+    var margin = {top: 40, right: 20, bottom: 200, left: 80},
         width = 350 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 
@@ -32,11 +32,18 @@
         .attr("height", height + margin.top + margin.bottom)
       .append("g")
         .attr("transform",
-              "translate(" + margin.left + "," + margin.top + ")");
+              "translate(" + margin.left + "," + margin.top + ")")
+
 
       // Scale the range of the data in the domains
       x.domain(data.map(function(d) { return d.properties.stop_name; }));
       y.domain([0, d3.max(data, function(d) { return d.properties.proportional_pop; })]);
+
+    // ADD TOOL TIP Div to body
+    // Define the div for the tooltip
+    var div = d3.select("#bar_graph_area").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
 
         // append the rectangles for the bar chart
       svg.selectAll(".bar")
@@ -49,7 +56,31 @@
           .attr("height", function(d) { return height - y(d.properties.proportional_pop); })
           .style("fill", "#ffe978")
           .style("stroke", "#ffd917")
-          .style("stroke-width", "1.5");
+          .style("stroke-width", "1.5")
+            //Our new hover effects
+         .on('mouseover', function (event, d) {
+            d3.select(this)
+               .style('fill', '#ff401f')
+               .style('stroke', '#ff401f')
+            div.transition()
+                .duration(10)
+                .style("opacity", .9);
+                div.html(d.properties.proportional_pop_comma)
+                     .style("left", (event.pageX - 80) + "px")
+                     .style("top", (event.pageY - 350) + "px")
+                     console.log(event.x, event.y)
+                     console.log(d.properties)
+                     })
+            .on('mouseout', function (d, i) {
+            d3.select(this)
+                .style("fill", "#ffe978")
+                .style("stroke", "#ffd917")
+               div.transition()
+               .duration('10')
+               .style("opacity", 0);
+              })
+
+
 
 
 
@@ -66,3 +97,27 @@
       // add the y Axis
       svg.append("g")
           .call(d3.axisLeft(y));
+
+        svg.append('text')
+            .attr('x',  -125)
+            .attr('y', -60)
+            .attr('transform', 'rotate(-90)')
+            .attr('text-anchor', 'middle')
+            .text('Number of Residents')
+svg.append('text')
+            .attr('x', -125)
+            .attr('y',-40)
+            .attr('transform', 'rotate(-90)')
+            .attr('text-anchor', 'middle')
+            .text('Living in Coverage Area')
+
+
+        svg.append('text')
+            .attr('x', margin.left +50 )
+            .attr('y', -20)
+            .attr('text-anchor', 'middle')
+            .text('Residential Coverage by Stop')
+
+
+
+

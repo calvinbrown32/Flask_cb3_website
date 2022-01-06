@@ -204,18 +204,20 @@
 // Any text between /* and */ will be ignored by JavaScript.
 
 // HOVER AND CLICK FUNCTIONS
-        function highlightFeature(e) {
+      function highlightFeature(e) {
         var layer = e.target;
         layer.setStyle({
         weight: 3.5,
         color: '#ff401f',
         fillOpacity: 0.2
         });
-
+       hover_output = layer.feature.properties
+       console.log("Leaflet Feature being Hovered Over: ")
+        console.log(layer.feature.properties);
 		if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
 			layer.bringToFront();
 		}
-
+    return hover_output
 	}
 
     function resetHighlight(e) {
