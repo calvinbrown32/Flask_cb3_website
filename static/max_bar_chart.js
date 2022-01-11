@@ -13,7 +13,7 @@
     console.log(data);
 
     // set the dimensions and margins of the graph
-    var margin = {top: 40, right: 20, bottom: 200, left: 80},
+    var margin = {top: 60, right: 20, bottom: 200, left: 100},
         width = 350 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 
@@ -80,10 +80,6 @@
                .style("opacity", 0);
               })
 
-
-
-
-
       // add the x Axis
       svg.append("g")
           .attr("transform", "translate(0," + height + ")")
@@ -100,21 +96,21 @@
 
         svg.append('text')
             .attr('x',  -125)
-            .attr('y', -60)
+            .attr('y', -80)
             .attr('transform', 'rotate(-90)')
             .attr('text-anchor', 'middle')
             .text('Number of Residents')
-svg.append('text')
+            svg.append('text')
             .attr('x', -125)
-            .attr('y',-40)
+            .attr('y',-60)
             .attr('transform', 'rotate(-90)')
             .attr('text-anchor', 'middle')
             .text('Living in Coverage Area')
 
 
         svg.append('text')
-            .attr('x', margin.left +50 )
-            .attr('y', -20)
+            .attr('x', margin.left + 15 )
+            .attr('y', -30)
             .attr('text-anchor', 'middle')
             .text('Residential Coverage by Stop')
 
